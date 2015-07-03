@@ -1,0 +1,30 @@
+<div data-ng-controller='GraphCtrl' class="reveal-animation"  > <!-- data-ng-show="foundData" -->
+<hr/>
+<h2 class="dataMapTitle">{{graphTitle}}</h2>
+<p class="instructions">(Click Graph for Details)</p>
+
+<div class="graph-container">
+	<canvas class="chart-base" data="data" labels="labels" chart-type="chartType" series="series"
+	    legend="true" click="onClick" colours="colors" options="options"></canvas> 
+	    
+	    
+	<div class="btn-group float-left" role="group" aria-label="Chart Type">
+	  <button type="button" class="btn" data-ng-class="chartType == 'Pie' ? 'active btn-info' : 'btn-default' " data-ng-click="setchartType('Pie')">Pie</button>
+	  <button type="button" class="btn" data-ng-class="chartType == 'Doughnut' ? 'active btn-info' : 'btn-default' " data-ng-click="setchartType('Doughnut')">Doughnut</button>
+	  <button type="button" class="btn" data-ng-class="chartType == 'Bar' ? 'active btn-info' : 'btn-default' " data-ng-click="setchartType('Bar')">Bar</button>
+	</div>
+
+
+
+	<div class="btn-group float-right" role="group" aria-label="Datasets">
+	  <button ng-disabled="compareSelected" data-ng-repeat="series in allSeries" type="button" class="btn" data-ng-class=" series === selectedDataset ? 'active btn-primary' : 'btn-default' " data-ng-click="setDataset(series)">{{series}}</button>
+	</div>
+	
+	<div class="checkbox checkbox-info float-right clear-both" data-ng-show="chartType == 'Bar'" data-ng-click="compareDatasets()">
+		<input type="checkbox" data-ng-checked="compareSelected" id="checkbox1"> 
+		<label for="checkbox1">	<strong>Compare Categories</strong> </label> 
+	</div>
+
+</div>
+ 
+</div>
