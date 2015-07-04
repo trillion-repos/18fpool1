@@ -3,7 +3,7 @@
 var queryService = require("./queryOfda.server.service");
 var config = require('./../../config/config');
 
-module.exports.graphRpy = function (params, callback){
+module.exports.graphVolManCounts = function (params, callback){
 	var response = {};
 	var graphEntries = {};
 	var datasets = [{name:'drug', displayName:"Drugs"},{name:'device', displayName:"Devices"},{name:'food', displayName:"Food"}];

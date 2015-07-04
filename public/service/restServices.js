@@ -12,7 +12,7 @@ return $resource("./nav",{}, {
 
 openFDA.factory('FetchOpenFDASrvc', ['$resource',
  function($resource) {
- return $resource("./fetch/:appId/:modId/:fnId/:qId",{}, {
+ return $resource("./fetch/:qId",{}, {
  		get: {method: 'GET', cache: false, isArray: false}
  		});
 }]);

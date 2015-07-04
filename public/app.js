@@ -6,15 +6,15 @@ var openFDA = angular.module('OpenFDA', [ 'ngRoute','ngTable', 'angularUtils.dir
 openFDA.config([ '$routeProvider', '$locationProvider',
 		function($routeProvider, $locationProvider) {
 			
-			$routeProvider.when('/:appId', {
+			$routeProvider.when('/', {
 				templateUrl : 'view/core/homepage.html'
 			});
 			
-			$routeProvider.when('/:appId/:modId/:fnId', {
+			$routeProvider.when('/:appId', {
 				templateUrl : 'view/core/main.html'
 			});
 			
-			$routeProvider.otherwise('/openfda'); //TODO should be ISAAC
+			$routeProvider.otherwise('/');
 			$locationProvider.html5Mode(false).hashPrefix('!');
 		} ]);
 
