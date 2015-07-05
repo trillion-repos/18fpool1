@@ -5,29 +5,28 @@ var config = require('./../../config/config');
 var logger = require('./../utils/logger.js')(module);
 require('./../utils/utils');
 
-module.exports.tableRpm = function (params, callback){
+module.exports.tableRpf = function (params, callback){
 	var response = {};
 	var cols = [];
-	var datasets = [{name:'drug', displayName:"Drugs"},{name:'device', displayName:"Devices"},{name:'food', displayName:"Food"}];
+	var datasets = [{name:'drug', displayName:"Drugs"},{name:'device', displayName:"Devices"},{name:'food', displayName:"Foods"}];
 	var completeQueries = 0;
-	var state = config.states[params.state];
-	var month = params.month ? getMonthNumber(params.month) : {startMonth:1, nextMonth:1};
 	var startYear = params.year ? params.year : (new Date().getFullYear() - 10);
-	var endYear = month.startMonth === 12 ? startYear +1 : startYear;
-	if(!params.month)
-		endYear = params.year ? new Number(params.year) + 1 : new Number(new Date().getFullYear()) + 1;
+	var endYear = params.year ? new Number(params.year) + 1 : new Number(new Date().getFullYear()) + 1;
 	var it =0;
 	var tableData = [];
-
-
-	datasets.forEach(function(dataset){
+	var dataset;
+	
+	datasets.forEach(function(d){
+		if(d.displayName === params.dataset)
+			dataset = d.name;
+	});
 
 		var query = {
 			    queryId: 1,
-			    noun:dataset.name,
+			    noun:dataset,
 			    endpoint:'enforcement',
 			    params:{
-			      search:'(distribution_pattern:"'+params.state+'"+distribution_pattern:"'+state+'")+AND+(report_date:['+startYear+'-'+month.startMonth+'-01+TO+'+endYear+'-'+month.nextMonth+'-01])',
+			      search:'('+params.field.toLowerCase() +':"'+params.value.toLowerCase()+'")+AND+(report_date:['+startYear+'-01-01+TO+'+endYear+'-01-01])',
 			      limit:100, //if set to 0, it will default to 1 results
 			      skip:0
 			    }
@@ -54,7 +53,7 @@ module.exports.tableRpm = function (params, callback){
 			}
 
 			logger.info("RAW DATA COUNT: ", data.results.length);
-			logger.debug("RAW DATA: ", JSON.stringify(data));
+			//logger.debug("RAW DATA: ", JSON.stringify(data));
 
 			if(data.results.length){
 				var column = {};
@@ -85,48 +84,13 @@ module.exports.tableRpm = function (params, callback){
 
 			logger.debug(dataset, JSON.stringify(tableData));
 			logger.debug(JSON.stringify(cols));
-			if (completeQueries == datasets.length){
-				response.tableTitle = "Recalls for " + startYear +" per Month for " + state.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
-				response.table = tableData;
-				response.columns = cols;
 
-				callback(null, response);
-			}
+			//response.tableTitle = "Recalls for " + startYear +" per Month for " + state.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+			response.table = tableData;
+			response.columns = cols;
+
+			callback(null, response);
+			
 		});
-	});
-
-	function getDisplayNames(){
-		var displayNames = [];
-		datasets.forEach(function(dataset){
-			displayNames.push(dataset.displayName);
-		});
-
-		return displayNames;
-	}
-
-	function getMonthNumber(monString){
-		var monthObj = {};
-		monthObj["jan"] = 1;
-		monthObj["feb"] = 2;
-		monthObj["mar"] = 3;
-		monthObj["apr"] = 4;
-		monthObj["may"] = 5;
-		monthObj["jun"] = 6;
-		monthObj["jul"] = 7;
-		monthObj["aug"] = 8;
-		monthObj["sep"] = 9;
-		monthObj["oct"] = 10;
-		monthObj["nov"] = 11;
-		monthObj["dec"] = 12;
-
-		var monthNumber = monthObj[monString.toLowerCase()];
-		var nextMonth = 0;
-
-		if(monthNumber == 12)
-			nextMonth =1;
-		else
-			nextMonth = monthNumber + 1;
-
-		return {startMonth:monthNumber, nextMonth:nextMonth };
-	}
+	
 };

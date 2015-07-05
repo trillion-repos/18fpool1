@@ -4,29 +4,10 @@
 
 openFDA.factory('SharedDataSrvc', ['FetchOpenFDASrvc',
 function(FetchOpenFDASrvc) {
-	 var graphData;
-	 var view;
 	 var foundData = false;
 	 var tableData;
-	 var currentYear;
 	 var mapData;
-	 var fillKey;
-	 var currentState;
 	 var dataset = 'drug';
-
-	 
-     function getGraphData() {
-        return graphData;
-    }
-     
-     function getView(){
-    	 return view;
-     }
-     
-     function setView(v){
-    	 console.log("Set View: " + v);
-    	 view = v;
-     }
      
      function getFoundData(){
     	 return foundData;
@@ -36,25 +17,8 @@ function(FetchOpenFDASrvc) {
     	 return tableData;
      }
      
-     function removeTableData(){
-    	 tableData = {};
-     }
-     
-     function getYear(){
-    	 return currentYear;
-     }
-     
-     function getFillKey(){
-    	 return fillKey;
-     }
-     
-     function getState(){
-    	 return currentState;
-     }
-     
-     function clearGraph(){
-    	 foundData = false;
-    	 graphData = {};
+     function setTableData(data){
+    	 tableData = data;
      }
      
      function getSelectedDataset(){
@@ -65,11 +29,8 @@ function(FetchOpenFDASrvc) {
     	 dataset = d; 
      }
      
-     function fetchData (qId, searchFields, callback){
-    	var params = {};
-		params.qId = qId; 
-    	params.field = searchFields;    		
- 		
+     function fetchData (params, callback){
+    	 		
  		FetchOpenFDASrvc.get(params, function success(response) {
  					
  					
@@ -94,16 +55,9 @@ function(FetchOpenFDASrvc) {
     
     return {
     	fetchData: fetchData,
-    	getGraphData : getGraphData,
-    	getView: getView,
-    	setView: setView,
     	getFoundData : getFoundData,
     	getTableData : getTableData,
-    	getYear : getYear,
-    	removeTableData : removeTableData,
-    	getFillKey : getFillKey,
-    	getState : getState,
-    	clearGraph : clearGraph,
+    	setTableData : setTableData,
     	getSelectedDataset : getSelectedDataset,
     	setSelectedDataset : setSelectedDataset
     }

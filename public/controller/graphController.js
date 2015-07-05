@@ -13,6 +13,7 @@ openFDA.controller('GraphCtrl', [
     
     
     $scope.load = function (queryType){
+    	SharedDataSrvc.setTableData([]);
         allData = [];
         response = [];
         $scope.allSeries = [];
@@ -20,7 +21,7 @@ openFDA.controller('GraphCtrl', [
     	$scope.selectedDataField = queryType;
     	queryType = queryType.toLowerCase().replace(" ", "_");
     	
-		SharedDataSrvc.fetchData('graphVolManCounts', queryType, function(error, r){
+		SharedDataSrvc.fetchData({qId:'graphVolManCounts', field: queryType}, function(error, r){
 			if(error){
 				console.error(JSON.stringify(error));
 				return;
@@ -106,7 +107,17 @@ openFDA.controller('GraphCtrl', [
     
 
     $scope.onClick = function (points, evt) {
-      console.log(points, evt);      
+      console.log(JSON.stringify(points)); 
+      SharedDataSrvc.setTableData([]);	
+      var params = {qId:'tableRpf', field: $scope.selectedDataField, value: points[0].label, dataset: $scope.selectedDataset };
+      SharedDataSrvc.fetchData(params, function(error, r){
+			if(error){
+				console.error(JSON.stringify(error));
+				return;
+			}
+			//console.log("Success Response: ", JSON.stringify(r));
+			SharedDataSrvc.setTableData(r);			
+		});
     };
     
     $scope.compareDatasets = function(){
@@ -126,6 +137,7 @@ openFDA.controller('GraphCtrl', [
     	$scope.selectedDataset = dataset;
     	$scope.graphTitle = $scope.selectedDataset + " " + title;
     	$scope.setchartType($scope.chartType  || 'Bar');
+    	SharedDataSrvc.setTableData([]);
     };
     
     

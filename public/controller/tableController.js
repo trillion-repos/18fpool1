@@ -8,9 +8,10 @@ openFDA.controller('TableCtrl', [
 		'$filter',
 		'$routeParams',
 		'ngTableParams',
-		'$location','$anchorScroll', 'SharedDataSrvc',
-		function($scope, $filter, $routeParams, ngTableParams, $location, $anchorScroll, SharedDataSrvc) {
-			var activeCols = ["recall_number", "reason_for_recall", "status", "distribution_pattern", "product_quantity", "recall_initiation_date", "product_type"];
+		'SharedDataSrvc', 
+		'smoothScroll',
+		function($scope, $filter, $routeParams, ngTableParams, SharedDataSrvc, smoothScroll) {
+			var activeCols = ["recall_number", "reason_for_recall", "status", "classification", "recalling_firm", "report_date", "voluntary_mandated", "product_type"];
 			$scope.organizedData = [];
 			$scope.filteredData = [];
 			$scope.columns = [];
@@ -62,13 +63,13 @@ openFDA.controller('TableCtrl', [
 				   if(value){
 					   //console.log("TableData: ", JSON.stringify(value));
 					   
-					   $scope.organizedData = value.data;					   
+					   $scope.organizedData = value.table;					   
 					   $scope.title = value.title;
 					   $scope.allColumns = value.columns;
 					   $scope.columns = [];
 					   $scope.filteredData = [];
 					   
-					   if(value.columns && value.data){
+					   if(value.columns && value.table){
 						   
 						   $scope.filteredData = $scope.organizedData;
 						   $scope.allColumns.forEach(function(col){
@@ -80,8 +81,7 @@ openFDA.controller('TableCtrl', [
 						   
 						   $scope.tableParams.reload();
 						   
-						 	$location.hash('tableAnchor');
-						    $anchorScroll();
+						   smoothScroll(document.getElementById('tableScroll'));
 					   }
 					   
 				   }
