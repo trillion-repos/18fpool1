@@ -65,38 +65,28 @@ function(FetchOpenFDASrvc) {
     	 dataset = d; 
      }
      
-     function fetchData (qId){		
+     function fetchData (qId, searchFields, callback){
+    	var params = {};
+		params.qId = qId; 
+    	params.field = searchFields;    		
  		
- 		
- 		FetchOpenFDASrvc.get({qId: qId}, function success(response) {
+ 		FetchOpenFDASrvc.get(params, function success(response) {
  					
  					
  					if(!response){
- 						console.warn("No data found for graph=" + qId);
- 						return;
+ 						console.warn("No data found for graph="+$routeParams);
+ 						callback(null, []);
  					}
  					
 
  					//console.log("Response Success:" + JSON.stringify(response));
  					
- 					if(response.graph){
-	 					graphData = {};					
-	 					graphData.data = response.graphData;
-	 					graphData.title = response.graphTitle;
-	 					graphData.labels = response.graphLabels;
-	 					}
- 					
- 					if(response.table){
- 						tableData = {};
- 						tableData.title = response.tableTitle;
- 						tableData.columns = response.columns;
- 						tableData.data = response.table;
-
- 					}
+ 					callback(null, response);
  					
  					},
  				function error(errorResponse) {
- 					console.log("Error:" + JSON.stringify(errorResponse));				
+ 					console.log("Error:" + JSON.stringify(errorResponse));	
+ 					callback(errorResponse);
  					//$scope.error.push(errorResponse.data);
  					});
  	}
