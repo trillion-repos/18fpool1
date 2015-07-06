@@ -1,26 +1,80 @@
 ## Trillion OpenFDA Data Visualization Platform
 
-Trillion Technology Solutions, Inc. [(Trillion)](http://www.ttsiglobal.com) has implemented a prototype – “Trillion OpenFDA Data Visualization Platform” [(ODV Platform)](https://18fpool1.ttsiglobal.com) - in response to GSA 18F Agile BPA that leverages industry leading open source technology stacks and developed using Agile development methodology.
+[![Build Status](https://18fci.ttsiglobal.com/buildStatus/icon?job=18f-openfda)](https://18fci.ttsiglobal.com/me/my-views/view/All/job/18f-openfda/)
 
+Trillion Technology Solutions, Inc. [(Trillion)] (http://www.ttsiglobal.com) has implemented a prototype – “Trillion OpenFDA Data Visualization Platform” [(ODV Platform)] (http://18f.ttsiglobal.com) - in response to GSA 18F Agile BPA that leverages industry leading open source technology stacks and developed using Agile development methodology.
 ## Methodology Approach
-Trillion has embraced Agile since 2006 and successfully implemented several turnkey and mission critical applications in commercial and government sectors. We leveraged this experience to create a compact set of [Agile sprints for developing](https://github.com/trillion1-repos/18fpool1/blob/master/doc/DesignPoolEvidenceForQuestion2.jpg) a solution for the challenge posed by GSA 18F BPA. [Our team](https://github.com/trillion1-repos/18fpool1/blob/master/doc/WorkingSessions.pdf) comprised of members who were self-organizing, cross-functional and participated in flushing out user stories, design and development, unit and integration testing. One of the conference rooms in our office was barricaded off from the rest of the company and was used exclusively by the ODV Platform Agile team for daily Scrums, discussions and collaborative team development.  An open source Agile Lifecycle Management (ALM) tool – [Taiga](https://github.com/trillion1-repos/18fpool1/blob/master/doc/Pool1DesignTeamBacklogIssues.pdf) – was used for capturing all Agile artifacts.
-The development consisted of one single Sprint of one week.  User stories were created based on product owner discussions with the team as well as style guides and wireframes created by the user interface experts on the team, per product owners requirements.  Skeleton user stories were created based on the [wireframes](https://github.com/trillion1-repos/18fpool1/blob/master/doc/18F_Pool1_Wireframes.pdf) and [style guide](https://github.com/trillion1-repos/18fpool1/blob/master/doc/StyleGuide.pdf). Daily Scrum meetings provided everyone to come together formally to discuss work done the previous day, to plan for that day, and to bring up impediments if any. The last day of each sprint included sprint retrospective and review followed by sprint planning for the next sprint. A product backlog was created by the product owner from which user stories were chosen for the sprint which went into the sprint backlog.
-End-of-the-sprint deployment was done on the Amazon instance.  [Product owner and another stakeholder](https://github.com/trillion1-repos/18fpool1/blob/master/doc/18fpool1_product_feedback.pdf) provided feedback on the application, including the [visualization and usability](https://github.com/trillion1-repos/18fpool1/blob/master/doc/EndUserTesting.png) aspect of the application.  The usability tester, Visual designer, content provider and user interface developer worked closely to review the feedback.  Defects and tasks were created to incorporate these changes on the last day of the sprint which was considered the hardening sprint, due to the short one week sprint used for Pool 1 prototype.  
+Trillion leveraged several years of Agile experience in commercial and government sectors this experience to create a compact set of Agile sprints for development a solution for the challenge posed by GSA 18F BPA.  Our team was self-organizing, cross-functional, and participated in flushing out user stories, design and development, unit and integration testing.  A conference room was barricaded off from the rest of the company and was used exclusively by the [ODV Platform Agile team](https://github.com/trillion1-repos/18f/blob/master/doc/DesignPoolEvidencetoQuestion%201.pdf) for [daily Scrums, discussions and collaborative team development.](https://github.com/trillion1-repos/18f/blob/master/doc/WorkingSessions.pdf)
 
+Sprint 0 comprised of understanding and detailing the requirements presented in the RFQ and creating a few skeleton user stories that created a bare bone structure of the prototype including [wireframes](https://github.com/trillion1-repos/18f/blob/master/doc/18FWireframes.pdf), AWS setup and GitHub among others.  Core development was during Sprint 1, Sprint 2 and Sprint 3, each lasting 5 days. We had 5 days of hardening where we did integration testing. User stories with acceptance criteria were created after discussion among the team and with the product owner.  Daily Scrum meetings provided everyone to come together formally to discuss work done the previous day and the plan for that day in addition to bringing up impediments if any.  The last day of each sprint included sprint retrospective and review followed by sprint planning for the next sprint.  A product backlog was created by the [product owner](https://github.com/trillion1-repos/18f/blob/master/doc/DesignPoolEvindenceforQ7.PDF) from which user stories were chosen for each sprint which went into the sprint backlog.  An open source Agile Lifecycle Management (ALM) tool – [Taiga](https://github.com/trillion1-repos/18f/blob/master/doc/AgileArtifacts.pdf) – was used for capturing all Agile artifacts.  End of the sprint deployments were done on the Amazon instance and a demo was provided to the product owner with feedback taken that was loaded back into the product backlog.  The product owner [“resolved”](https://github.com/trillion1-repos/18f/blob/master/doc/GSA18FPrototypeIssues.pdf) the user stories to show acceptance of the deliverables.
 ## Design and Development Approach
-The ODV Platform was developed using a [human centered design](https://github.com/trillion1-repos/18fpool1/blob/master/doc/WorkingSessions.pdf).  The goal was to create a simple intuitive web based graphical user interface for users to view drug, device and food recall data provided by the government for consumption by the general public.  The prototype was implemented using a technology stack that is pluggable and requires minimal changes to substitute technology libraries.  A style guide was created that outlined the fonts and colors that the product owner wanted in the end product.  It also outlined the general features of the user interface that the product owner required per their user feedback and requirements.  Based on the product owner requirements, our UI designer/expert and Content designer got together and created a set of wireframes that outlined how the screens should look like and how the navigation on the screens is expected to work.  The style guide and wireframes were handed over to the development team where we created a ["Responsive Design"](https://github.com/trillion1-repos/18fpool1/blob/master/doc/TwoDeviceRequirement.pdf) to work across different devices.
+The ODV Platform leans on a human centered design to provide an intuitive web based graphical user interface for citizens to view data provided by the government for consumption by the general public.  The prototype was implemented using a technology stack that is pluggable and requires minimal changes to substitute technology libraries.  Several years of experience with DevOps in the government and commercial sectors and associated lessons learned were useful in quickly putting together the DevOps platform for the ODV Platform.  Trillion used several tools for DevOps including GitHub for code repository, [AWS](https://github.com/trillion1-repos/18f/blob/master/doc/amazon.png) for Linux instances, Jenkins for Continuous Integration, [Jasmine for testing](https://github.com/trillion1-repos/18f/tree/master/app/test), [Docker](https://github.com/trillion1-repos/18f/blob/master/doc/docker.png) for deployment, WAVE for 508 testing, Istanbul for code coverage and Datadog for continuous monitoring, among others.
+SSL certificates are used for providing secure access to the ODV Platform. We used Amazon Virtual Private Cloud (VPC) PaaS services to create Web DMZ Zone Architecture allowing only 443 through Apache to connect to ODV Platform.
+The technical stack used in shown in the [logical architecture diagram.](https://github.com/trillion1-repos/18f/blob/master/doc/Architecture.png)
+Our [deployment architecture](https://github.com/trillion1-repos/18f/blob/master/doc/Deployment.png) shows how the technology stack is laid out across the environments.
 
-## ODV Features and Usage
-ODV Platform allows users an interactive user interface that provides a drill down method to accessing recall information provided by the government. Hierarchical information access works as follows:
-*	At the top level from the [home page](https://github.com/trillion1-repos/18fpool1/blob/master/doc/HomePage.png) which takes them to an interactive graphic page which shows graphs – pie, doughnut and bar – based on the recall data.  Recall information is available for each category – Drugs, Devices and Food
-* The user can view a [graph](https://github.com/trillion1-repos/18fpool1/blob/master/doc/Page1.png) for each category – Drugs, Devices and Food.  This results in the graph changing per the data for that category
-*	The user can also update these graphs by selecting the data fields for each of the [recalls – Classification, Status](https://github.com/trillion1-repos/18fpool1/blob/master/doc/Page2.png) and Voluntary Mandated
-*	The users can click on the graphs for viewing [detailed records](https://github.com/trillion1-repos/18fpool1/blob/master/doc/Page3.png) of the data associated with the section of the graph that was clicked
-*	The detailed list has smart search per [each column shown](https://github.com/trillion1-repos/18fpool1/blob/master/doc/SearchPage.png).  Typing in part or full phrases filters down the records list to match the search pattern.
-*	The detailed list also allows users to pick and choose the [columns/fields](https://github.com/trillion1-repos/18fpool1/blob/master/doc/SmartSearch.png) that they wish to view in the detailed records.
+##ODV Features and Usage
+ODV Platform provides users an interactive interface that implements a drill down method to accessing recall information provided by the government. Hierarchical information access works as follows:
+* At the top level is the [home page](https://github.com/trillion1-repos/18f/blob/master/doc/18fHomePage.png) which takes the user to an interactive map of United States.  Recall information is available for each category – Drugs, Devices and Food.
+* The users can click on [each state](https://github.com/trillion1-repos/18f/blob/master/doc/18fUSMap.png) of the map to obtain a bar graph of annual historical color coded recall information, for each of the categories per US state.
+* Clicking on each annual [bar](https://github.com/trillion1-repos/18f/blob/master/doc/18fAnnualRecall.png) in the graph, per category, provides monthly recalls.
+*	Clicking on each category per [month](https://github.com/trillion1-repos/18f/blob/master/doc/18fMonthlyRecall.png) lists detailed recall records for that month, US state and chosen category.
+*	The detailed list [smart search](https://github.com/trillion1-repos/18f/blob/master/doc/18fListRecall.png) provides column based filtering.
+The detailed list also allows users to pick and choose the [columns/fields](https://github.com/trillion1-repos/18fpool1/blob/master/doc/SmartSearch.png) that they wish to view in the detailed records.
+## Production URL
+https://18f.ttsiglobal.com
 
-##Production URL
-https://18fpool1.ttsiglobal.com
+## Continuous Integration Environment  
+https://18fci.ttsiglobal.com/view/All/builds
 
-## Installation
+##Code Coverage
+https://18fci.ttsiglobal.com/job/18f-openfda/clover/
+
+## Test Site
+https://18fci.ttsiglobal.com/node
+
+## ODV Continuous Monitoring Environment
+https://p.datadoghq.com/sb/wHi387-defd17b564
+
+### Installation
+See our [Installation Guide](INSTALL.md)
+## Trillion OpenFDA Data Visualization Platform
+
+[![Build Status](https://18fci.ttsiglobal.com/buildStatus/icon?job=18f-openfda)](https://18fci.ttsiglobal.com/me/my-views/view/All/job/18f-openfda/)
+
+Trillion Technology Solutions, Inc. [(Trillion)] (http://www.ttsiglobal.com) has implemented a prototype – “Trillion OpenFDA Data Visualization Platform” [(ODV Platform)] (http://18f.ttsiglobal.com) - in response to GSA 18F Agile BPA that leverages industry leading open source technology stacks and developed using Agile development methodology.
+## Methodology Approach
+Trillion leveraged several years of Agile experience in commercial and government sectors this experience to create a compact set of Agile sprints for development a solution for the challenge posed by GSA 18F BPA.  Our team was self-organizing, cross-functional, and participated in flushing out user stories, design and development, unit and integration testing.  A conference room was barricaded off from the rest of the company and was used exclusively by the [ODV Platform Agile team](https://github.com/trillion1-repos/18f/blob/master/doc/DesignPoolEvidencetoQuestion%201.pdf) for [daily Scrums, discussions and collaborative team development.](https://github.com/trillion1-repos/18f/blob/master/doc/WorkingSessions.pdf)
+
+Sprint 0 comprised of understanding and detailing the requirements presented in the RFQ and creating a few skeleton user stories that created a bare bone structure of the prototype including [wireframes](https://github.com/trillion1-repos/18f/blob/master/doc/18FWireframes.pdf), AWS setup and GitHub among others.  Core development was during Sprint 1, Sprint 2 and Sprint 3, each lasting 5 days. We had 5 days of hardening where we did integration testing. User stories with acceptance criteria were created after discussion among the team and with the product owner.  Daily Scrum meetings provided everyone to come together formally to discuss work done the previous day and the plan for that day in addition to bringing up impediments if any.  The last day of each sprint included sprint retrospective and review followed by sprint planning for the next sprint.  A product backlog was created by the [product owner](https://github.com/trillion1-repos/18f/blob/master/doc/DesignPoolEvindenceforQ7.PDF) from which user stories were chosen for each sprint which went into the sprint backlog.  An open source Agile Lifecycle Management (ALM) tool – [Taiga](https://github.com/trillion1-repos/18f/blob/master/doc/AgileArtifacts.pdf) – was used for capturing all Agile artifacts.  End of the sprint deployments were done on the Amazon instance and a demo was provided to the product owner with feedback taken that was loaded back into the product backlog.  The product owner [“resolved”](https://github.com/trillion1-repos/18f/blob/master/doc/GSA18FPrototypeIssues.pdf) the user stories to show acceptance of the deliverables.
+## Design and Development Approach
+The ODV Platform leans on a human centered design to provide an intuitive web based graphical user interface for citizens to view data provided by the government for consumption by the general public.  The prototype was implemented using a technology stack that is pluggable and requires minimal changes to substitute technology libraries.  Several years of experience with DevOps in the government and commercial sectors and associated lessons learned were useful in quickly putting together the DevOps platform for the ODV Platform.  Trillion used several tools for DevOps including GitHub for code repository, [AWS](https://github.com/trillion1-repos/18f/blob/master/doc/amazon.png) for Linux instances, Jenkins for Continuous Integration, [Jasmine for testing](https://github.com/trillion1-repos/18f/tree/master/app/test), [Docker](https://github.com/trillion1-repos/18f/blob/master/doc/docker.png) for deployment, WAVE for 508 testing, Istanbul for code coverage and Datadog for continuous monitoring, among others.
+SSL certificates are used for providing secure access to the ODV Platform. We used Amazon Virtual Private Cloud (VPC) PaaS services to create Web DMZ Zone Architecture allowing only 443 through Apache to connect to ODV Platform.
+The technical stack used in shown in the [logical architecture diagram.](https://github.com/trillion1-repos/18f/blob/master/doc/Architecture.png)
+Our [deployment architecture](https://github.com/trillion1-repos/18f/blob/master/doc/Deployment.png) shows how the technology stack is laid out across the environments.
+
+##ODV Features and Usage
+ODV Platform provides users an interactive interface that implements a drill down method to accessing recall information provided by the government. Hierarchical information access works as follows:
+* At the top level is the [home page](https://github.com/trillion1-repos/18f/blob/master/doc/18fHomePage.png) which takes the user to an interactive map of United States.  Recall information is available for each category – Drugs, Devices and Food.
+* The users can click on [each state](https://github.com/trillion1-repos/18f/blob/master/doc/18fUSMap.png) of the map to obtain a bar graph of annual historical color coded recall information, for each of the categories per US state.
+* Clicking on each annual [bar](https://github.com/trillion1-repos/18f/blob/master/doc/18fAnnualRecall.png) in the graph, per category, provides monthly recalls.
+*	Clicking on each category per [month](https://github.com/trillion1-repos/18f/blob/master/doc/18fMonthlyRecall.png) lists detailed recall records for that month, US state and chosen category.
+*	The detailed list [smart search](https://github.com/trillion1-repos/18f/blob/master/doc/18fListRecall.png) provides column based filtering.
+The detailed list also allows users to pick and choose the [columns/fields](https://github.com/trillion1-repos/18fpool1/blob/master/doc/SmartSearch.png) that they wish to view in the detailed records.
+## Production URL
+https://18f.ttsiglobal.com
+
+## Continuous Integration Environment  
+https://18fci.ttsiglobal.com/view/All/builds
+
+##Code Coverage
+https://18fci.ttsiglobal.com/job/18f-openfda/clover/
+
+## Test Site
+https://18fci.ttsiglobal.com/node
+
+## ODV Continuous Monitoring Environment
+https://p.datadoghq.com/sb/wHi387-defd17b564
+
+### Installation
 See our [Installation Guide](INSTALL.md)
