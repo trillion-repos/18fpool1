@@ -12,7 +12,7 @@ The ODV Platform was developed using a human centered design.  The goal was to c
 
 ## ODV Features and Usage
 ODV Platform allows users an interactive user interface that provides a drill down method to accessing recall information provided by the government. Hierarchical information access works as follows:
- *	At the top level from the home page which takes them to an interactive graphic page which shows graphs – pie, doughnut and bar – based on the recall data.  Recall information is available for each category – Drugs, Devices and Food
+*	At the top level from the home page which takes them to an interactive graphic page which shows graphs – pie, doughnut and bar – based on the recall data.  Recall information is available for each category – Drugs, Devices and Food
 * The user can view a graph for each category – Drugs, Devices and Food.  This results in the graph changing per the data for that category
 *	The user can also update these graphs by selecting the data fields for each of the recalls – Classification, Status and Voluntary Mandated
 *	The users can click on the graphs for viewing detailed records of the data associated with the section of the graph that was clicked
