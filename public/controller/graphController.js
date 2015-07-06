@@ -1,13 +1,62 @@
 openFDA.controller('GraphCtrl', [
 		'$scope', 'SharedDataSrvc',
 		function($scope, SharedDataSrvc ) {
+		
+		
+	$scope.options = {barValueSpacing : 15};
+    var allData = [];
+    var response = [];
+    var allColors = [];
+    var title = "";
+    $scope.dataFields = ['Classification', 'Status', 'Voluntary Mandated'];
+    
+    
+    
+    $scope.load = function (queryType){
+    	SharedDataSrvc.setTableData([]);
+        allData = [];
+        response = [];
+        $scope.allSeries = [];
+        allColors = [];
+    	$scope.selectedDataField = queryType;
+    	queryType = queryType.toLowerCase().replace(" ", "_");
+    	
+		SharedDataSrvc.fetchData({qId:'graphVolManCounts', field: queryType}, function(error, r){
+			if(error){
+				console.error(JSON.stringify(error));
+				return;
+			}
+			console.log("Success Response: ", JSON.stringify(r.graph));
+			response = r.graph;
+			$scope.labels = [];
+			r.labels.forEach(function(label){
+				if(queryType !== 'classification'){
+					$scope.labels =  r.labels;
+					return;
+				}
+				else
+					$scope.labels.push("Class " + label);
+			});
+			title = r.title;
 			
-	SharedDataSrvc.fetchData('graphVolManCounts');
+			response.forEach(function(d){
+		    	allData.push(d.data);
+		    	$scope.allSeries.push(d.series); 
+		    	allColors.push(d.color);
+		    });
+			
+			$scope.setDataset (r.graph[0].series);
+			
+		});
+		
+		
+		$scope.compareSelected = false;
 	
-	$scope.compareSelected = false;
+    }
 	
+    $scope.load($scope.dataFields[0]);
 	
-	var response = [{label:"Drugs", color:{ 
+	/*response = [{series:"Drugs", color:{ 
 	      fillColor: 'rgba(151,187,205,0.8)',
 	      strokeColor: 'rgba(151,187,205,1)',
 	      highlightFill : 'rgba(151,187,205,1)',
@@ -15,7 +64,7 @@ openFDA.controller('GraphCtrl', [
 	} 
 								
 						, data:[75, 15, 10]}, 
-	                   {label:"Devices", color: 
+	                   {series:"Devices", color: 
 	                   { 
 	             	      fillColor: 'rgba(247,70,74,0.8)',
 	             	      strokeColor: 'rgba(247,70,74,1)',
@@ -25,7 +74,7 @@ openFDA.controller('GraphCtrl', [
 	                	   
 	                	   
 	               , data:[50,20,30]}, 
-	                   {label:"Foods", color: { 
+	                   {series:"Foods", color: { 
 		             	      fillColor: 'rgba(253,180,92,0.8)',
 		             	      strokeColor: 'rgba(253,180,92,1)',
 		             	      highlightFill : 'rgba(253,180,92,1)',
@@ -33,18 +82,10 @@ openFDA.controller('GraphCtrl', [
 		             	} 
 	                	   
 	                	 , data:[60,35,5]}
-	                   ];	
+	                   ];*/	
 	
-    $scope.labels = ["Voluntary", "Mandated", "Unknown"];
-    $scope.options = {barValueSpacing : 15};
-    var allData = [];
-    $scope.allSeries = [];
-    var allColors = [];
-    response.forEach(function(d){
-    	allData.push(d.data);
-    	$scope.allSeries.push(d.label); 
-    	allColors.push(d.color);
-    });
+    
+    
     
     $scope.setchartType = function(type){
     	$scope.chartType = type;
@@ -66,7 +107,17 @@ openFDA.controller('GraphCtrl', [
     
 
     $scope.onClick = function (points, evt) {
-      console.log(points, evt);      
+      console.log(JSON.stringify(points)); 
+      SharedDataSrvc.setTableData([]);	
+      var params = {qId:'tableRpf', field: $scope.selectedDataField, value: points[0].label, dataset: $scope.selectedDataset };
+      SharedDataSrvc.fetchData(params, function(error, r){
+			if(error){
+				console.error(JSON.stringify(error));
+				return;
+			}
+			//console.log("Success Response: ", JSON.stringify(r));
+			SharedDataSrvc.setTableData(r);			
+		});
     };
     
     $scope.compareDatasets = function(){
@@ -75,19 +126,21 @@ openFDA.controller('GraphCtrl', [
     		$scope.data = allData;
     		$scope.series = $scope.allSeries;
     		$scope.colors = allColors;
-
+    		$scope.graphTitle = title;
     	}else{
+    		$scope.graphTitle = $scope.selectedDataset + " " + title;
     		$scope.setchartType($scope.chartType);
 		}
     };
     
     $scope.setDataset = function(dataset){
     	$scope.selectedDataset = dataset;
-    	$scope.graphTitle = $scope.selectedDataset + " Recalls Voluntary Vs Mandated";
-    	$scope.setchartType('Bar');
+    	$scope.graphTitle = $scope.selectedDataset + " " + title;
+    	$scope.setchartType($scope.chartType  || 'Bar');
+    	SharedDataSrvc.setTableData([]);
     };
     
-    $scope.setDataset ('Drugs');
+    
 
 			
 
