@@ -1,11 +1,5 @@
 # Installation
-Please  use one of the below options to install Trillion OpenFDA Visualization Platform
-
-
-. Manual installation with Node.js and Bower 
-
-
-
+Please follow the below instructions to install Trillion OpenFDA Visualization Platform.
 
 ### Manual installation with Node.js
 It is assumed that [node.js  v0.10.36] is installed and configured on your system for these instructions.
