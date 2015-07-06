@@ -60,7 +60,8 @@ ODV Platform provides users an interactive interface that implements a drill dow
 * Clicking on each annual [bar](https://github.com/trillion1-repos/18f/blob/master/doc/18fAnnualRecall.png) in the graph, per category, provides monthly recalls.
 *	Clicking on each category per [month](https://github.com/trillion1-repos/18f/blob/master/doc/18fMonthlyRecall.png) lists detailed recall records for that month, US state and chosen category.
 *	The detailed list [smart search](https://github.com/trillion1-repos/18f/blob/master/doc/18fListRecall.png) provides column based filtering.
-The detailed list also allows users to pick and choose the [columns/fields](https://github.com/trillion1-repos/18fpool1/blob/master/doc/SmartSearch.png) that they wish to view in the detailed records.
+* The detailed list also allows users to pick and choose the [columns/fields](https://github.com/trillion1-repos/18fpool1/blob/master/doc/SmartSearch.png) that they wish to view in the detailed records.
+
 ## Production URL
 https://18f.ttsiglobal.com
 
