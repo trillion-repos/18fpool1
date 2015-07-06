@@ -14,7 +14,7 @@ It is assumed that [node.js  v0.10.36] is installed and configured on your syste
 ```sh
 $ git clone git@github.com:trillion1-repos/18fpool1.git
 $ cd 18fpoo1
-$npm install -g bower
+$ npm install -g bower
 $ npm install -g forever
 $ npm install
 $ bower install 
