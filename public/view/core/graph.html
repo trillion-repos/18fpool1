@@ -14,7 +14,7 @@
 		<label for="checkbox1">	<strong>Compare Categories</strong> </label> 
 	</div>
 
-	<div class="dropdown float-right dataFields-mobile">
+	<div class="dropdown float-right dataFields-mobile" style="z-index:3">
 		<span><strong>Data Fields: </strong></span>
 	    <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">{{selectedDataField}}
 	    <span class="caret"></span></button>
@@ -23,10 +23,14 @@
 	    </ul>
   	</div>
 
-
-	<canvas class="chart-base" data="data" labels="labels" chart-type="chartType" series="series"
-	    legend="true" click="onClick" colours="colors" options="options"></canvas> 
-	    
+	<div class='preloader-parent'> 
+		
+		<div class="absolute-center overlay" data-ng-show="isLoading">
+			<div ng-activity-indicator="DottedDark" class="absolute-center" data-ng-show="isLoading"></div>
+		</div>
+		<canvas class="chart-base" data="data" labels="labels" chart-type="chartType" series="series"
+	    legend="true" click="onClick" colours="colors" options="options"> </canvas> 
+	 </div>  
 	    
 	<div class="btn-group float-left" role="group" aria-label="Chart Type">
 	  <button type="button" class="btn" data-ng-class="chartType == 'Pie' ? 'active btn-info' : 'btn-default' " data-ng-click="setchartType('Pie')">Pie</button>

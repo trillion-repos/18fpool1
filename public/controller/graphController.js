@@ -1,6 +1,6 @@
 openFDA.controller('GraphCtrl', [
-		'$scope', 'SharedDataSrvc',
-		function($scope, SharedDataSrvc ) {
+		'$scope', 'SharedDataSrvc', '$activityIndicator',
+		function($scope, SharedDataSrvc, $activityIndicator ) {
 		
 		
 	$scope.options = {barValueSpacing : 15};
@@ -9,7 +9,6 @@ openFDA.controller('GraphCtrl', [
     var allColors = [];
     var title = "";
     $scope.dataFields = ['Classification', 'Status', 'Voluntary Mandated'];
-    
     
     
     $scope.load = function (queryType){
@@ -45,12 +44,12 @@ openFDA.controller('GraphCtrl', [
 		    	allColors.push(d.color);
 		    });
 			
-			$scope.setDataset (r.graph[0].series);
+			$scope.setDataset ($scope.selectedDataset || r.graph[0].series);
 			
 		});
 		
 		
-		$scope.compareSelected = false;
+		//$scope.compareSelected = false;
 	
     }
 	
@@ -89,15 +88,21 @@ openFDA.controller('GraphCtrl', [
     
     $scope.setchartType = function(type){
     	$scope.chartType = type;
-    	$scope.compareSelected = false;
+    	
     	
     	if($scope.chartType === 'Bar'){
-
     		$scope.data = new Array(allData[$scope.allSeries.indexOf($scope.selectedDataset)]);
     		$scope.series = new Array($scope.selectedDataset);
     		$scope.colors = new Array(allColors[$scope.allSeries.indexOf($scope.selectedDataset)]);
+    		
+    		if($scope.compareSelected){
+    			$scope.compareSelected = false;
+    			$scope.compareDatasets();
+    		}
+    			
     	}
     	else{
+    		$scope.compareSelected = false;
     		$scope.data = allData[$scope.allSeries.indexOf($scope.selectedDataset)];    	
     		$scope.colors = allColors;
     	}
@@ -108,6 +113,8 @@ openFDA.controller('GraphCtrl', [
 
     $scope.onClick = function (points, evt) {
       console.log(JSON.stringify(points)); 
+      $activityIndicator.startAnimating();
+      $scope.isLoading = true;
       SharedDataSrvc.setTableData([]);	
       var params = {qId:'tableRpf', field: $scope.selectedDataField, value: points[0].label, dataset: $scope.selectedDataset };
       SharedDataSrvc.fetchData(params, function(error, r){
@@ -116,7 +123,9 @@ openFDA.controller('GraphCtrl', [
 				return;
 			}
 			//console.log("Success Response: ", JSON.stringify(r));
-			SharedDataSrvc.setTableData(r);			
+			SharedDataSrvc.setTableData(r);	
+		    $activityIndicator.stopAnimating();
+		    $scope.isLoading = false;
 		});
     };
     
