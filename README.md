@@ -1,6 +1,6 @@
 ## Trillion OpenFDA Data Visualization Platform
 
-Trillion Technology Solutions, Inc. (Trillion) has implemented a prototype – “Trillion OpenFDA Data Visualization Platform” (ODV Platform) - in response to GSA 18F Agile BPA that leverages industry leading open source technology stacks and developed using Agile development methodology.
+Trillion Technology Solutions, Inc. [(Trillion))](http://www.ttsiglobal.com) has implemented a prototype – “Trillion OpenFDA Data Visualization Platform” [(ODV Platform)](https://18fpool1.ttsiglobal.com) - in response to GSA 18F Agile BPA that leverages industry leading open source technology stacks and developed using Agile development methodology.
 
 ## Methodology Approach
 Trillion has embraced Agile since 2006 and successfully implemented several turnkey and mission critical applications in commercial and government sectors. We leveraged this experience to create a compact set of Agile sprints for development a solution for the challenge posed by GSA 18F BPA. Our team comprised of members who were self-organizing and cross-functional and participated in flushing out user stories, design and development, unit and integration testing. One of the conference rooms in our office was barricaded off from the rest of the company and was used exclusively by the ODV Platform Agile team for daily Scrums, discussions and collaborative team development.  An open source Agile Lifecycle Management (ALM) tool – Tiaga – was used for capturing all Agile artifacts.
@@ -21,6 +21,7 @@ ODV Platform allows users an interactive user interface that provides a top down
 
 ##Production URL
 https://18fpool1.ttsiglobal.com
+
 ## Installation
-See our Installation Guide
+See our [Installation Guide](INSTALL.md)
 
