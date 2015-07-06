@@ -5,13 +5,13 @@ Please  use one of the below options to install Trillion OpenFDA Visualization P
 . Manual installation with Node.js and Bower 
 
 
-```
+
 
 ### Manual installation with Node.js
 It is assumed that [node.js  v0.10.36] is installed and configured on your system for these instructions.
 
 #### Build
-
+```
 $ git clone git@github.com:trillion1-repos/18fpool1.git
 $ cd 18fpoo1
 $ npm install -g bower
@@ -31,3 +31,4 @@ Once running the application can be accessed at -
 * http://[your IP]:3000
 
 
+[node.js  v0.10.36]:http://blog.nodejs.org/2015/01/26/node-v0-10-36-stable/
