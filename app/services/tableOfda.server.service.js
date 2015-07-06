@@ -15,10 +15,13 @@ module.exports.tableRpf = function (params, callback){
 	var it =0;
 	var tableData = [];
 	var dataset;
+	var datasetDisplayName;
 	
 	datasets.forEach(function(d){
-		if(d.displayName === params.dataset)
+		if(d.displayName === params.dataset){
 			dataset = d.name;
+			datasetDisplayName = d.displayName;
+		}
 	});
 
 		var query = {
@@ -85,7 +88,7 @@ module.exports.tableRpf = function (params, callback){
 			logger.debug(dataset, JSON.stringify(tableData));
 			logger.debug(JSON.stringify(cols));
 
-			//response.tableTitle = "Recalls for " + startYear +" per Month for " + state.replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+			response.title = "Recalls for " + datasetDisplayName;
 			response.table = tableData;
 			response.columns = cols;
 
