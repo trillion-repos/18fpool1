@@ -9,15 +9,15 @@ module.exports.graphVolManCounts = function (params, callback){
 	switch (params.field.toLowerCase()) {
 	case 'status': 
 		allowedLabels = ['ongoing', 'terminated', 'completed'];
-		title = "Recalls Status";
+		title = "Recalls by Status";
 		break;
 	case 'voluntary_mandated':
 		allowedLabels = ['voluntary', 'mandated'];
-		title = "Recalls Voluntary Vs Mandated";
+		title = "Recalls by Voluntary/Mandated";
 		break;
 	case 'classification':
 		allowedLabels = ['i', 'ii', 'iii'];
-		title = "Recalls Classification";
+		title = "Recalls by Classification";
 		break;
 	default:
 		break;

@@ -6,7 +6,6 @@ openFDA.factory('SharedDataSrvc', ['FetchOpenFDASrvc',
 function(FetchOpenFDASrvc) {
 	 var foundData = false;
 	 var tableData;
-	 var mapData;
 	 var dataset = 'drug';
      
      function getFoundData(){
